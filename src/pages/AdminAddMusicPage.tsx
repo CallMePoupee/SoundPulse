@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Download, CircleAlert as AlertCircle, CircleCheck as CheckCircle, X, Save } from 'lucide-react';
+import { Download, CircleAlert as AlertCircle, CircleCheck as CheckCircle, X, Save, ImagePlus } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import SiteHeader from '@/components/SiteHeader';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -314,9 +314,10 @@ export default function AdminAddMusicPage() {
                 <h3>Preview</h3>
                 <span className="admin-csv-preview-count">{parsedSongs.length} {parsedSongs.length === 1 ? 'song' : 'songs'}</span>
               </div>
-              <div className="admin-csv-card-grid">
+              <div className="admin-csv-card-list">
                 {parsedSongs.map((song, index) => (
                   <div key={index} className={`admin-csv-song-card ${song.errors.length > 0 ? 'admin-csv-song-card--error' : 'admin-csv-song-card--valid'}`}>
+                    {/* Card header: index + title + status */}
                     <div className="admin-csv-song-card-top">
                       <div className="admin-csv-song-card-title-row">
                         <span className="admin-csv-song-card-index">{index + 1}</span>
@@ -328,6 +329,36 @@ export default function AdminAddMusicPage() {
                       </span>
                     </div>
                     <div className="admin-csv-song-card-performer">{song.performer || <span className="admin-csv-empty">Unknown performer</span>}</div>
+
+                    {/* Media zone: banners + covers */}
+                    <div className="admin-csv-song-card-media">
+                      <div className="admin-csv-song-card-banners">
+                        <div className="admin-csv-media-slot admin-csv-media-slot--banner">
+                          <ImagePlus size={20} />
+                          <span>Band Banner</span>
+                        </div>
+                        <div className="admin-csv-media-slot admin-csv-media-slot--banner">
+                          <ImagePlus size={20} />
+                          <span>Album Banner</span>
+                        </div>
+                        <div className="admin-csv-media-slot admin-csv-media-slot--banner">
+                          <ImagePlus size={20} />
+                          <span>Song Banner</span>
+                        </div>
+                      </div>
+                      <div className="admin-csv-song-card-covers">
+                        <div className="admin-csv-media-slot admin-csv-media-slot--cover">
+                          <ImagePlus size={20} />
+                          <span>Single Cover</span>
+                        </div>
+                        <div className="admin-csv-media-slot admin-csv-media-slot--cover">
+                          <ImagePlus size={20} />
+                          <span>Album Cover</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Info fields */}
                     <div className="admin-csv-song-card-fields">
                       <div className="admin-csv-song-card-field">
                         <span className="admin-csv-song-card-label">Album</span>
@@ -354,11 +385,15 @@ export default function AdminAddMusicPage() {
                         <span className="admin-csv-song-card-value">{song.activeSince || <span className="admin-csv-empty">—</span>}</span>
                       </div>
                     </div>
+
+                    {/* Footer */}
                     <div className="admin-csv-song-card-footer">
                       <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
                         {song.hasAsset ? 'Assets Found' : 'Assets Missing'}
                       </span>
                     </div>
+
+                    {/* Errors */}
                     {song.errors.length > 0 && (
                       <div className="admin-csv-song-card-errors">
                         {song.errors.map((error, errorIndex) => (

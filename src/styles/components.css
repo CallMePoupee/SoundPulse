@@ -5165,10 +5165,10 @@
   font-weight: var(--font-weight-medium);
 }
 
-/* ── Card grid ── */
-.admin-csv-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+/* ── Card list (one per row) ── */
+.admin-csv-card-list {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-16);
 }
 
@@ -5181,13 +5181,11 @@
   border-radius: var(--radius-8);
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(21, 21, 21, 0.06);
-  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard),
-    transform var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .admin-csv-song-card:hover {
   box-shadow: 0 4px 16px rgba(21, 21, 21, 0.1);
-  transform: translateY(-1px);
 }
 
 .admin-csv-song-card--valid {
@@ -5198,25 +5196,25 @@
   border-left: 3px solid var(--accent-primary);
 }
 
-/* ── Card top (title + status) ── */
+/* ── Card header ── */
 .admin-csv-song-card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-8);
-  padding: var(--space-16) var(--space-16) var(--space-8) var(--space-16);
+  padding: var(--space-16) var(--space-20) var(--space-8) var(--space-20);
 }
 
 .admin-csv-song-card-title-row {
   display: flex;
   align-items: baseline;
-  gap: var(--space-8);
+  gap: var(--space-10);
   min-width: 0;
   flex: 1;
 }
 
 .admin-csv-song-card-index {
-  font-size: var(--font-size-12);
+  font-size: var(--font-size-14);
   font-weight: var(--font-weight-bold);
   color: var(--text-secondary);
   font-variant-numeric: tabular-nums;
@@ -5225,7 +5223,7 @@
 
 .admin-csv-song-card-title {
   margin: 0;
-  font-size: var(--font-size-16);
+  font-size: var(--font-size-19);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   line-height: 1.3;
@@ -5236,8 +5234,8 @@
 
 /* ── Performer line ── */
 .admin-csv-song-card-performer {
-  padding: 0 var(--space-16) var(--space-12) var(--space-16);
-  font-size: var(--font-size-13);
+  padding: 0 var(--space-20) var(--space-16) var(--space-20);
+  font-size: var(--font-size-14);
   color: var(--text-secondary);
   font-weight: var(--font-weight-medium);
   overflow: hidden;
@@ -5245,10 +5243,69 @@
   white-space: nowrap;
 }
 
+/* ── Media zone (banners + covers) ── */
+.admin-csv-song-card-media {
+  display: flex;
+  gap: var(--space-16);
+  padding: 0 var(--space-20) var(--space-16) var(--space-20);
+}
+
+.admin-csv-song-card-banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-csv-song-card-covers {
+  display: flex;
+  gap: var(--space-8);
+  flex-shrink: 0;
+}
+
+/* ── Media slots ── */
+.admin-csv-media-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  border: 2px dashed var(--color-black-alpha-15);
+  border-radius: var(--radius-4);
+  background: var(--color-neutral-200);
+  color: var(--text-secondary);
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+  cursor: pointer;
+}
+
+.admin-csv-media-slot:hover {
+  border-color: var(--accent-primary);
+  background: rgba(177, 38, 38, 0.04);
+}
+
+.admin-csv-media-slot--banner {
+  height: 64px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0 var(--space-16);
+  gap: var(--space-10);
+}
+
+.admin-csv-media-slot--cover {
+  width: 100px;
+  height: 100px;
+}
+
 /* ── Fields grid ── */
 .admin-csv-song-card-fields {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--color-black-alpha-09);
   border-top: 1px solid var(--color-black-alpha-09);
@@ -5259,7 +5316,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--space-10) var(--space-16);
+  padding: var(--space-12) var(--space-20);
   background: var(--color-neutral-100);
   min-width: 0;
 }
@@ -5281,14 +5338,14 @@
   white-space: nowrap;
 }
 
-/* ── Footer (asset badge) ── */
+/* ── Footer ── */
 .admin-csv-song-card-footer {
-  padding: var(--space-12) var(--space-16);
+  padding: var(--space-12) var(--space-20);
 }
 
-/* ── Error section in card ── */
+/* ── Error section ── */
 .admin-csv-song-card-errors {
-  padding: var(--space-8) var(--space-16) var(--space-12) var(--space-16);
+  padding: var(--space-8) var(--space-20) var(--space-12) var(--space-20);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -5371,12 +5428,25 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .admin-csv-card-grid {
-    grid-template-columns: 1fr;
+  .admin-csv-song-card-fields {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .admin-csv-song-card-fields {
-    grid-template-columns: 1fr;
+  .admin-csv-song-card-media {
+    flex-direction: column;
+  }
+
+  .admin-csv-song-card-covers {
+    justify-content: flex-start;
+  }
+
+  .admin-csv-media-slot--cover {
+    width: 80px;
+    height: 80px;
+  }
+
+  .admin-csv-media-slot--banner {
+    height: 56px;
   }
 }
 
