@@ -26,12 +26,6 @@ interface ParsedSong {
   hasAsset: boolean;
 }
 
-interface ValidationError {
-  row: number;
-  field: string;
-  message: string;
-}
-
 const CSV_SCHEMA = [
   'Song Title',
   'Performer(s)', 
@@ -313,125 +307,60 @@ export default function AdminAddMusicPage() {
             </div>
           )}
 
-          {/* Preview Table */}
+          {/* Preview Cards */}
           {showPreview && parsedSongs.length > 0 && (
             <div className="admin-csv-preview">
               <div className="admin-csv-preview-header">
                 <h3>Preview</h3>
-                <span className="admin-csv-preview-count">{parsedSongs.length} {parsedSongs.length === 1 ? 'row' : 'rows'}</span>
+                <span className="admin-csv-preview-count">{parsedSongs.length} {parsedSongs.length === 1 ? 'song' : 'songs'}</span>
               </div>
-              <div className="admin-csv-table-wrapper">
-                <table className="admin-csv-table">
-                  <thead>
-                    <tr>
-                      <th className="admin-csv-th-status">Status</th>
-                      <th className="admin-csv-th-num">#</th>
-                      <th>Song Title</th>
-                      <th>Performer(s)</th>
-                      <th>Album</th>
-                      <th>Year</th>
-                      <th>Label</th>
-                      <th>Genre</th>
-                      <th>Origin</th>
-                      <th>Since</th>
-                      <th>Assets</th>
-                      <th className="admin-csv-th-errors">Errors</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {parsedSongs.map((song, index) => (
-                      <tr key={index} className={`admin-csv-row ${song.errors.length > 0 ? 'admin-csv-row--error' : 'admin-csv-row--valid'}`}>
-                        <td className="admin-csv-td-status">
-                          <span className={`admin-csv-status-badge ${song.errors.length === 0 ? 'admin-csv-status-badge--valid' : 'admin-csv-status-badge--error'}`}>
-                            {song.errors.length === 0 ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
-                            <span>{song.errors.length === 0 ? 'Valid' : `${song.errors.length} ${song.errors.length === 1 ? 'error' : 'errors'}`}</span>
-                          </span>
-                        </td>
-                        <td className="admin-csv-td-num">{index + 1}</td>
-                        <td className="admin-csv-td-title">{song.title || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.performer || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.album || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.releaseYear || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.recordLabel || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.genre || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.cityOfOrigin || <span className="admin-csv-empty">—</span>}</td>
-                        <td>{song.activeSince || <span className="admin-csv-empty">—</span>}</td>
-                        <td>
-                          <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
-                            {song.hasAsset ? 'Found' : 'Missing'}
-                          </span>
-                        </td>
-                        <td className="admin-csv-td-errors">
-                          {song.errors.length > 0 && (
-                            <div className="admin-csv-errors">
-                              {song.errors.map((error, errorIndex) => (
-                                <div key={errorIndex} className="admin-csv-error">
-                                  <AlertCircle size={11} className="admin-csv-error-icon" />
-                                  <span>{error}</span>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Mobile card list */}
-              <div className="admin-csv-card-list">
+              <div className="admin-csv-card-grid">
                 {parsedSongs.map((song, index) => (
-                  <div key={index} className={`admin-csv-card ${song.errors.length > 0 ? 'admin-csv-card--error' : 'admin-csv-card--valid'}`}>
-                    <div className="admin-csv-card-header">
+                  <div key={index} className={`admin-csv-song-card ${song.errors.length > 0 ? 'admin-csv-song-card--error' : 'admin-csv-song-card--valid'}`}>
+                    <div className="admin-csv-song-card-top">
+                      <div className="admin-csv-song-card-title-row">
+                        <span className="admin-csv-song-card-index">{index + 1}</span>
+                        <h4 className="admin-csv-song-card-title">{song.title || 'Untitled'}</h4>
+                      </div>
                       <span className={`admin-csv-status-badge ${song.errors.length === 0 ? 'admin-csv-status-badge--valid' : 'admin-csv-status-badge--error'}`}>
                         {song.errors.length === 0 ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
                         <span>{song.errors.length === 0 ? 'Valid' : `${song.errors.length} ${song.errors.length === 1 ? 'error' : 'errors'}`}</span>
                       </span>
-                      <span className="admin-csv-card-num">Row {index + 1}</span>
                     </div>
-                    <div className="admin-csv-card-body">
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Song</span>
-                        <span className="admin-csv-card-value">{song.title || '—'}</span>
+                    <div className="admin-csv-song-card-performer">{song.performer || <span className="admin-csv-empty">Unknown performer</span>}</div>
+                    <div className="admin-csv-song-card-fields">
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">Album</span>
+                        <span className="admin-csv-song-card-value">{song.album || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Performer</span>
-                        <span className="admin-csv-card-value">{song.performer || '—'}</span>
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">Year</span>
+                        <span className="admin-csv-song-card-value">{song.releaseYear || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Album</span>
-                        <span className="admin-csv-card-value">{song.album || '—'}</span>
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">Label</span>
+                        <span className="admin-csv-song-card-value">{song.recordLabel || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Year</span>
-                        <span className="admin-csv-card-value">{song.releaseYear || '—'}</span>
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">Genre</span>
+                        <span className="admin-csv-song-card-value">{song.genre || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Label</span>
-                        <span className="admin-csv-card-value">{song.recordLabel || '—'}</span>
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">City of Origin</span>
+                        <span className="admin-csv-song-card-value">{song.cityOfOrigin || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Genre</span>
-                        <span className="admin-csv-card-value">{song.genre || '—'}</span>
+                      <div className="admin-csv-song-card-field">
+                        <span className="admin-csv-song-card-label">Active Since</span>
+                        <span className="admin-csv-song-card-value">{song.activeSince || <span className="admin-csv-empty">—</span>}</span>
                       </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Origin</span>
-                        <span className="admin-csv-card-value">{song.cityOfOrigin || '—'}</span>
-                      </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Since</span>
-                        <span className="admin-csv-card-value">{song.activeSince || '—'}</span>
-                      </div>
-                      <div className="admin-csv-card-field">
-                        <span className="admin-csv-card-label">Assets</span>
-                        <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
-                          {song.hasAsset ? 'Found' : 'Missing'}
-                        </span>
-                      </div>
+                    </div>
+                    <div className="admin-csv-song-card-footer">
+                      <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
+                        {song.hasAsset ? 'Assets Found' : 'Assets Missing'}
+                      </span>
                     </div>
                     {song.errors.length > 0 && (
-                      <div className="admin-csv-card-errors">
+                      <div className="admin-csv-song-card-errors">
                         {song.errors.map((error, errorIndex) => (
                           <div key={errorIndex} className="admin-csv-error">
                             <AlertCircle size={11} className="admin-csv-error-icon" />

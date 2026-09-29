@@ -5165,91 +5165,138 @@
   font-weight: var(--font-weight-medium);
 }
 
-/* ── Table (desktop) ── */
-.admin-csv-table-wrapper {
-  overflow-x: auto;
+/* ── Card grid ── */
+.admin-csv-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-16);
+}
+
+/* ── Song card ── */
+.admin-csv-song-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-neutral-100);
   border: 1px solid var(--color-black-alpha-15);
   border-radius: var(--radius-8);
+  overflow: hidden;
   box-shadow: 0 2px 8px rgba(21, 21, 21, 0.06);
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard),
+    transform var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.admin-csv-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--font-size-13);
-  background: var(--color-neutral-100);
+.admin-csv-song-card:hover {
+  box-shadow: 0 4px 16px rgba(21, 21, 21, 0.1);
+  transform: translateY(-1px);
 }
 
-.admin-csv-table th {
-  padding: var(--space-12) var(--space-10);
-  background: var(--color-neutral-200);
-  border-bottom: 2px solid var(--color-black-alpha-15);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
-  text-align: left;
-  white-space: nowrap;
-  font-size: var(--font-size-12);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.admin-csv-song-card--valid {
+  border-left: 3px solid var(--status-positive);
 }
 
-.admin-csv-th-status,
-.admin-csv-th-num {
-  width: 1%;
-  white-space: nowrap;
-}
-
-.admin-csv-th-errors {
-  min-width: 180px;
-}
-
-.admin-csv-table td {
-  padding: var(--space-10) var(--space-10);
-  border-bottom: 1px solid var(--color-black-alpha-09);
-  vertical-align: top;
-  line-height: 1.4;
-  transition: background-color var(--motion-duration-fast) var(--motion-easing-standard);
-}
-
-.admin-csv-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.admin-csv-table tbody tr:hover td {
-  background: var(--color-black-alpha-09);
-}
-
-.admin-csv-row--valid td {
-  border-left: 3px solid transparent;
-}
-
-.admin-csv-row--error td {
+.admin-csv-song-card--error {
   border-left: 3px solid var(--accent-primary);
 }
 
-.admin-csv-td-status {
-  white-space: nowrap;
+/* ── Card top (title + status) ── */
+.admin-csv-song-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-16) var(--space-16) var(--space-8) var(--space-16);
 }
 
-.admin-csv-td-num {
+.admin-csv-song-card-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-csv-song-card-index {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
   color: var(--text-secondary);
-  font-weight: var(--font-weight-medium);
   font-variant-numeric: tabular-nums;
-  text-align: center;
-  width: 32px;
+  flex-shrink: 0;
 }
 
-.admin-csv-td-title {
+.admin-csv-song-card-title {
+  margin: 0;
+  font-size: var(--font-size-16);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.admin-csv-td-errors {
-  min-width: 180px;
+/* ── Performer line ── */
+.admin-csv-song-card-performer {
+  padding: 0 var(--space-16) var(--space-12) var(--space-16);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* ── Status Badges ── */
+/* ── Fields grid ── */
+.admin-csv-song-card-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--color-black-alpha-09);
+  border-top: 1px solid var(--color-black-alpha-09);
+  border-bottom: 1px solid var(--color-black-alpha-09);
+}
+
+.admin-csv-song-card-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-neutral-100);
+  min-width: 0;
+}
+
+.admin-csv-song-card-label {
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-csv-song-card-value {
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Footer (asset badge) ── */
+.admin-csv-song-card-footer {
+  padding: var(--space-12) var(--space-16);
+}
+
+/* ── Error section in card ── */
+.admin-csv-song-card-errors {
+  padding: var(--space-8) var(--space-16) var(--space-12) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  border-top: 1px solid rgba(177, 38, 38, 0.12);
+  background: rgba(177, 38, 38, 0.04);
+}
+
+/* ── Status badges ── */
 .admin-csv-status-badge {
   display: inline-flex;
   align-items: center;
@@ -5259,6 +5306,7 @@
   font-size: var(--font-size-11);
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .admin-csv-status-badge--valid {
@@ -5321,98 +5369,14 @@
   margin-top: 1px;
 }
 
-/* ── Mobile card list ── */
-.admin-csv-card-list {
-  display: none;
-}
-
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .admin-csv-table-wrapper {
-    display: none;
+  .admin-csv-card-grid {
+    grid-template-columns: 1fr;
   }
 
-  .admin-csv-card-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
-  }
-
-  .admin-csv-card {
-    background: var(--color-neutral-100);
-    border: 1px solid var(--color-black-alpha-15);
-    border-left: 3px solid transparent;
-    border-radius: var(--radius-8);
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(21, 21, 21, 0.06);
-  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
-  scroll-margin-left: var(--space-24);
-  margin-inline: calc(-1 * var(--space-24));
-    min-width: calc(100% + 2 * var(--space-24));
-  max-width: none;
-  width: fit-content;
-    min-width: 100%;
-  }
-
-  .admin-csv-card--valid {
-    border-left-color: var(--status-positive);
-  }
-
-  .admin-csv-card--error {
-    border-left-color: var(--accent-primary);
-  }
-
-  .admin-csv-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-10) var(--space-12);
-    background: var(--color-neutral-200);
-    border-bottom: 1px solid var(--color-black-alpha-09);
-  }
-
-  .admin-csv-card-num {
-    font-size: var(--font-size-11);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-secondary);
-  }
-
-  .admin-csv-card-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8) var(--space-12);
-    padding: var(--space-12);
-  }
-
-  .admin-csv-card-field {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .admin-csv-card-label {
-    font-size: var(--font-size-10);
-    font-weight: var(--font-weight-semibold);
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .admin-csv-card-value {
-    font-size: var(--font-size-13);
-    color: var(--text-primary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .admin-csv-card-errors {
-    padding: var(--space-8) var(--space-12);
-    border-top: 1px solid var(--color-black-alpha-09);
-    background: rgba(177, 38, 38, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+  .admin-csv-song-card-fields {
+    grid-template-columns: 1fr;
   }
 }
 
