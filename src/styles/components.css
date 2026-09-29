@@ -5565,3 +5565,218 @@
     align-items: center;
   }
 }
+
+/* Added-song report interface */
+.admin-added-song-report {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-20);
+  background-color: #f4c52f;
+  background-image: url('/interface/added-songs.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.admin-added-song-report-topline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) auto auto;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.admin-added-song-report-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-width: 0;
+  min-height: 48px;
+  padding: var(--space-8) var(--space-12);
+  background: rgba(91, 67, 78, 0.92);
+  color: var(--color-neutral-100);
+}
+
+.admin-added-song-report-label {
+  flex-shrink: 0;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.admin-added-song-report-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+}
+
+.admin-added-song-report-index {
+  color: var(--text-primary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+.admin-added-song-report-banner,
+.admin-added-song-report-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border: 2px dashed rgba(21, 21, 21, 0.42);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text-primary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  transition: background var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.admin-added-song-report-banner:hover,
+.admin-added-song-report-cover:hover {
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.admin-added-song-report-banner--performer {
+  min-height: 112px;
+  width: 100%;
+  background: rgba(91, 145, 74, 0.92);
+  color: var(--color-neutral-100);
+  border-color: transparent;
+  font-size: var(--font-size-19);
+}
+
+.admin-added-song-report-main {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) 170px;
+  align-items: center;
+  gap: var(--space-20);
+  min-height: 230px;
+}
+
+.admin-added-song-report-cover {
+  min-height: 190px;
+  background: rgba(157, 57, 193, 0.9);
+  color: var(--color-neutral-100);
+  border-color: transparent;
+  flex-direction: column;
+  font-size: var(--font-size-16);
+}
+
+.admin-added-song-report-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-width: 0;
+  padding: var(--space-16);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.admin-added-song-report-album {
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-added-song-report-meta,
+.admin-added-song-report-origin {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+
+.admin-added-song-report-meta span,
+.admin-added-song-report-origin span,
+.admin-added-song-report-genres {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-13);
+}
+
+.admin-added-song-report-details strong {
+  color: var(--text-secondary);
+  font-size: var(--font-size-10);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-added-song-report-bottom-banners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-20);
+}
+
+.admin-added-song-report-banner--album,
+.admin-added-song-report-banner--song {
+  min-height: 72px;
+  background: rgba(107, 105, 39, 0.9);
+  color: var(--color-neutral-100);
+  border-color: transparent;
+  font-size: var(--font-size-16);
+}
+
+.admin-added-song-report .admin-csv-song-card-errors {
+  margin: calc(-1 * var(--space-4)) 0 0;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .admin-added-song-report {
+    padding: var(--space-12);
+    gap: var(--space-8);
+  }
+
+  .admin-added-song-report-topline {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .admin-added-song-report-field {
+    min-height: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .admin-added-song-report-index,
+  .admin-added-song-report-topline > .admin-csv-status-badge {
+    justify-self: start;
+  }
+
+  .admin-added-song-report-main {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .admin-added-song-report-details {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: var(--space-12);
+  }
+
+  .admin-added-song-report-cover {
+    min-height: 140px;
+  }
+
+  .admin-added-song-report-bottom-banners {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .admin-added-song-report-banner--performer {
+    min-height: 76px;
+  }
+}

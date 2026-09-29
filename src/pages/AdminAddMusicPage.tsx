@@ -317,95 +317,75 @@ export default function AdminAddMusicPage() {
               <div className="admin-csv-card-list">
                 {parsedSongs.map((song, index) => (
                   <div key={index} className={`admin-csv-song-card ${song.errors.length > 0 ? 'admin-csv-song-card--error' : 'admin-csv-song-card--valid'}`}>
-                    {/* Card header: index + title + status */}
-                    <div className="admin-csv-song-card-top">
-                      <div className="admin-csv-song-card-title-row">
-                        <span className="admin-csv-song-card-index">{index + 1}</span>
-                        <h4 className="admin-csv-song-card-title">{song.title || 'Untitled'}</h4>
-                      </div>
-                      <span className={`admin-csv-status-badge ${song.errors.length === 0 ? 'admin-csv-status-badge--valid' : 'admin-csv-status-badge--error'}`}>
-                        {song.errors.length === 0 ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
-                        <span>{song.errors.length === 0 ? 'Valid' : `${song.errors.length} ${song.errors.length === 1 ? 'error' : 'errors'}`}</span>
-                      </span>
-                    </div>
-                    <div className="admin-csv-song-card-performer">{song.performer || <span className="admin-csv-empty">Unknown performer</span>}</div>
-
-                    {/* Two-column body: media left, info right */}
-                    <div className="admin-csv-song-card-body">
-                      {/* Left column: media */}
-                      <div className="admin-csv-song-card-media">
-                        <div className="admin-csv-song-card-banners">
-                          <div className="admin-csv-media-slot admin-csv-media-slot--banner">
-                            <ImagePlus size={20} />
-                            <span>Band Banner</span>
-                          </div>
-                          <div className="admin-csv-media-slot admin-csv-media-slot--banner">
-                            <ImagePlus size={20} />
-                            <span>Album Banner</span>
-                          </div>
-                          <div className="admin-csv-media-slot admin-csv-media-slot--banner">
-                            <ImagePlus size={20} />
-                            <span>Song Banner</span>
-                          </div>
+                    <div className="admin-added-song-report">
+                      <div className="admin-added-song-report-topline">
+                        <div className="admin-added-song-report-field admin-added-song-report-field--performer">
+                          <span className="admin-added-song-report-label">Performer</span>
+                          <span className="admin-added-song-report-value">{song.performer || 'Unknown performer'}</span>
                         </div>
-                        <div className="admin-csv-song-card-covers">
-                          <div className="admin-csv-media-slot admin-csv-media-slot--cover">
-                            <ImagePlus size={20} />
-                            <span>Single Cover</span>
-                          </div>
-                          <div className="admin-csv-media-slot admin-csv-media-slot--cover">
-                            <ImagePlus size={20} />
-                            <span>Album Cover</span>
-                          </div>
+                        <div className="admin-added-song-report-field admin-added-song-report-field--title">
+                          <span className="admin-added-song-report-label">Song Title</span>
+                          <span className="admin-added-song-report-value">{song.title || 'Untitled'}</span>
                         </div>
+                        <span className="admin-added-song-report-index">#{index + 1}</span>
+                        <span className={`admin-csv-status-badge ${song.errors.length === 0 ? 'admin-csv-status-badge--valid' : 'admin-csv-status-badge--error'}`}>
+                          {song.errors.length === 0 ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
+                          <span>{song.errors.length === 0 ? 'Valid' : `${song.errors.length} ${song.errors.length === 1 ? 'error' : 'errors'}`}</span>
+                        </span>
                       </div>
 
-                      {/* Right column: info */}
-                      <div className="admin-csv-song-card-info">
-                        <div className="admin-csv-song-card-fields">
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">Album</span>
-                            <span className="admin-csv-song-card-value">{song.album || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">Year</span>
-                            <span className="admin-csv-song-card-value">{song.releaseYear || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">Label</span>
-                            <span className="admin-csv-song-card-value">{song.recordLabel || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">Genre</span>
-                            <span className="admin-csv-song-card-value">{song.genre || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">City of Origin</span>
-                            <span className="admin-csv-song-card-value">{song.cityOfOrigin || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                          <div className="admin-csv-song-card-field">
-                            <span className="admin-csv-song-card-label">Active Since</span>
-                            <span className="admin-csv-song-card-value">{song.activeSince || <span className="admin-csv-empty">—</span>}</span>
-                          </div>
-                        </div>
+                      <div className="admin-added-song-report-banner admin-added-song-report-banner--performer">
+                        <ImagePlus size={22} />
+                        <span>Performer Banner</span>
+                      </div>
 
-                        <div className="admin-csv-song-card-footer">
+                      <div className="admin-added-song-report-main">
+                        <div className="admin-added-song-report-cover admin-added-song-report-cover--album">
+                          <ImagePlus size={22} />
+                          <span>Album Cover</span>
+                        </div>
+                        <div className="admin-added-song-report-details">
+                          <div className="admin-added-song-report-album">{song.album || 'Album Name'}</div>
+                          <div className="admin-added-song-report-meta">
+                            <span><strong>Year</strong>{song.releaseYear || '—'}</span>
+                            <span><strong>Label</strong>{song.recordLabel || '—'}</span>
+                          </div>
+                          <div className="admin-added-song-report-genres"><strong>Genres</strong>{song.genre || '—'}</div>
+                          <div className="admin-added-song-report-origin">
+                            <span><strong>Performer’s city of origin</strong>{song.cityOfOrigin || '—'}</span>
+                            <span><strong>Year active since</strong>{song.activeSince || '—'}</span>
+                          </div>
                           <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
                             {song.hasAsset ? 'Assets Found' : 'Assets Missing'}
                           </span>
                         </div>
-
-                        {song.errors.length > 0 && (
-                          <div className="admin-csv-song-card-errors">
-                            {song.errors.map((error, errorIndex) => (
-                              <div key={errorIndex} className="admin-csv-error">
-                                <AlertCircle size={11} className="admin-csv-error-icon" />
-                                <span>{error}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        <div className="admin-added-song-report-cover admin-added-song-report-cover--song">
+                          <ImagePlus size={22} />
+                          <span>Song Cover</span>
+                        </div>
                       </div>
+
+                      <div className="admin-added-song-report-bottom-banners">
+                        <div className="admin-added-song-report-banner admin-added-song-report-banner--album">
+                          <ImagePlus size={20} />
+                          <span>Album Banner</span>
+                        </div>
+                        <div className="admin-added-song-report-banner admin-added-song-report-banner--song">
+                          <ImagePlus size={20} />
+                          <span>Song Banner</span>
+                        </div>
+                      </div>
+
+                      {song.errors.length > 0 && (
+                        <div className="admin-csv-song-card-errors">
+                          {song.errors.map((error, errorIndex) => (
+                            <div key={errorIndex} className="admin-csv-error">
+                              <AlertCircle size={11} className="admin-csv-error-icon" />
+                              <span>{error}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
