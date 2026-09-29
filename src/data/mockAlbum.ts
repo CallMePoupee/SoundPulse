@@ -1,0 +1,71 @@
+import type { AlbumData } from '@/types/album';
+import { albumBannerSrc, honorBadgeSrc, songPath } from '@/utils/slug';
+
+export const albumData: AlbumData = {
+  title: 'Peepshow',
+  artist: 'Siouxsie and the Banshees',
+  artistHref: '#',
+  genre: 'Alternative Dance / Post-Punk',
+  year: '1988',
+  releaseType: 'Studio Album',
+  albumArtSrc: albumBannerSrc('Siouxsie and the Banshees', 'Peepshow'),
+  eyebrow: 'Album Profile',
+  metaText: 'Ninth studio album',
+  stats: [
+    { label: 'Peak Position', value: '1', highlight: true },
+    { label: 'Weeks at No. 1', value: '2' },
+    { label: 'Weeks in the Top 10', value: '9' },
+    { label: 'Weeks on Chart', value: '16' },
+    { label: 'Charting Songs', value: '2' },
+  ],
+  details: [
+    { label: 'Year', value: '1988' },
+    { label: 'Release Type', value: 'Studio Album' },
+    { label: 'Lead Single', value: 'Peek-a-Boo', href: songPath('Siouxsie and the Banshees', 'Peepshow', 'Peek-a-Boo') },
+  ],
+  weeks: [
+    { date: 'August 6, 1988', href: '/charts/1988-08-06', rank: 12, change: '—', changeType: 'muted', weeks: 1, milestone: 'Highest Debut' },
+    { date: 'August 13, 1988', href: '/charts/1988-08-13', rank: 7, change: '+5', changeType: 'positive', weeks: 2, isTop10: true, milestone: 'Enters the top 10' },
+    { date: 'August 20, 1988', href: '/charts/1988-08-20', rank: 4, change: '+3', changeType: 'positive', weeks: 3, isTop10: true, milestone: 'New Peak' },
+    { date: 'August 27, 1988', href: '/charts/1988-08-27', rank: 2, change: '+2', changeType: 'positive', weeks: 4, isTop10: true, milestone: 'New Peak' },
+    { date: 'September 3, 1988', href: '/charts/1988-09-03', rank: 1, change: '+1', changeType: 'positive', weeks: 5, isTop10: true, milestone: 'Peak Position' },
+    { date: 'September 10, 1988', href: '/charts/1988-09-10', rank: 1, change: '—', changeType: 'muted', weeks: 6, isTop10: true, milestone: 'Second week at #1' },
+    { date: 'September 17, 1988', href: '/charts/1988-09-17', rank: 3, change: '-2', changeType: 'negative', weeks: 7, isTop10: true },
+    { date: 'September 24, 1988', href: '/charts/1988-09-24', rank: 5, change: '-2', changeType: 'negative', weeks: 8, isTop10: true },
+    { date: 'October 1, 1988', href: '/charts/1988-10-01', rank: 8, change: '-3', changeType: 'negative', weeks: 9, isTop10: true },
+    { date: 'October 8, 1988', href: '/charts/1988-10-08', rank: 10, change: '-2', changeType: 'negative', weeks: 10, isTop10: true },
+    { date: 'October 15, 1988', href: '/charts/1988-10-15', rank: 13, change: '-3', changeType: 'negative', weeks: 11 },
+    { date: 'October 22, 1988', href: '/charts/1988-10-22', rank: 17, change: '-4', changeType: 'negative', weeks: 12 },
+    { date: 'October 29, 1988', href: '/charts/1988-10-29', rank: 22, change: '-5', changeType: 'negative', weeks: 13 },
+    { date: 'November 5, 1988', href: '/charts/1988-11-05', rank: 27, change: '-5', changeType: 'negative', weeks: 14 },
+    { date: 'November 12, 1988', href: '/charts/1988-11-12', rank: 34, change: '-7', changeType: 'negative', weeks: 15 },
+    { date: 'November 19, 1988', href: '/charts/1988-11-19', rank: 39, change: '-5', changeType: 'negative', weeks: 16 },
+  ],
+  tracks: [
+    { title: 'Peek-a-Boo', peak: 1, weeks: 13, status: 'Lead single', href: songPath('Siouxsie and the Banshees', 'Peepshow', 'Peek-a-Boo') },
+    { title: 'The Killing Jar', peak: 8, weeks: 9, status: 'Follow-up single' },
+    { title: 'Carousel', peak: 18, weeks: 5, status: 'Album cut' },
+    { title: 'Scarecrow', peak: 24, weeks: 4, status: 'Album cut' },
+  ],
+  honors: [
+    { badgeSrc: honorBadgeSrc('gold'), badgeAlt: 'Performer best-charting album first place honor badge', title: "Performer's Best-Charting Album #1", description: 'The strongest album-era showing for Siouxsie and the Banshees in the archive' },
+    { badgeSrc: honorBadgeSrc('silver'), badgeAlt: 'Album run silver honor badge', title: 'Longest Album Run #2', description: 'A 16-week album chart run anchored by two top-ten singles' },
+    { badgeSrc: honorBadgeSrc('fifth'), badgeAlt: 'Album of the year fifth place honor badge', title: 'Album of the Year #5', description: 'Recognized on the finalized 1988 year-end album chart' },
+  ],
+  albumsByArtist: [
+    { peak: 1, title: 'Peepshow', performer: 'Siouxsie and the Banshees', metric: 16, metricLabel: 'WEEKS', href: '#' },
+    { peak: 2, title: 'Tinderbox', performer: 'Siouxsie and the Banshees', metric: 12, metricLabel: 'WEEKS', href: '#' },
+    { peak: 3, title: 'Superstition', performer: 'Siouxsie and the Banshees', metric: 10, metricLabel: 'WEEKS', href: '#' },
+  ],
+  songsFromAlbum: [
+    { peak: 1, title: 'Peek-a-Boo', performer: 'Siouxsie and the Banshees', metric: 13, metricLabel: 'WEEKS', href: songPath('Siouxsie and the Banshees', 'Peepshow', 'Peek-a-Boo') },
+    { peak: 8, title: 'The Killing Jar', performer: 'Siouxsie and the Banshees', metric: 9, metricLabel: 'WEEKS', href: '#' },
+    { peak: 18, title: 'Carousel', performer: 'Siouxsie and the Banshees', metric: 5, metricLabel: 'WEEKS', href: '#' },
+  ],
+  relatedAlbums: [
+    { peak: 1, title: 'Disintegration', performer: 'The Cure', metric: 18, metricLabel: 'WEEKS', href: '#' },
+    { peak: 2, title: 'Ocean Rain', performer: 'Echo & the Bunnymen', metric: 14, metricLabel: 'WEEKS', href: '#' },
+    { peak: 1, title: 'Technique', performer: 'New Order', metric: 17, metricLabel: 'WEEKS', href: '#' },
+    { peak: 3, title: 'Floodland', performer: 'The Sisters of Mercy', metric: 12, metricLabel: 'WEEKS', href: '#' },
+  ],
+};

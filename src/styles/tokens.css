@@ -1,0 +1,186 @@
+/* ==========================================================================
+   LAYER 1: PRIMITIVE / FOUNDATION TOKENS
+   Raw design values — the single source of truth for all visual properties.
+   ========================================================================== */
+:root {
+  /* --- Color Primitives --- */
+  --color-neutral-100: #FFFFFF;
+  --color-neutral-200: #CBC9C2;
+  --color-neutral-300: #C4C2BC;
+  --color-neutral-400: #B9B7B0;
+  --color-neutral-600: #62605C;
+  --color-neutral-800: #2B2A28;
+  --color-neutral-900: #151515;
+
+  --color-crimson-600: #B12626;
+  --color-crimson-800: #881B1B;
+  --color-green-700:   #1D7032;
+  --color-purple-600:  #6B4B80;
+  --color-blue-700:    #2C5E96;
+  --color-tape-base:   #E4DEC8;
+
+  /* --- Translucent Inks & Overlays --- */
+  --color-black-alpha-09: rgba(21, 21, 21, 0.09);
+  --color-black-alpha-12: rgba(21, 21, 21, 0.12);
+  --color-black-alpha-15: rgba(21, 21, 21, 0.15);
+  --color-black-alpha-18: rgba(21, 21, 21, 0.18);
+  --color-black-alpha-22: rgba(21, 21, 21, 0.22);
+  --color-black-alpha-58: rgba(21, 21, 21, 0.58);
+  --color-white-alpha-15: rgba(255, 255, 255, 0.15);
+  --color-white-alpha-40: rgba(255, 255, 255, 0.40);
+
+  /* --- Typography --- */
+  --font-family-primary: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-display: "Love Ya Like A Sister", cursive;
+  --font-family-mono:    "Courier New", Courier, monospace;
+
+  --font-weight-regular:  400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-heavy:    800;
+  --font-weight-black:    900;
+
+  --font-size-7:   0.4375rem;   /* 7px   */
+  --font-size-7-5: 0.46875rem;  /* 7.5px */
+  --font-size-8:   0.5rem;      /* 8px   */
+  --font-size-10:  0.625rem;    /* 10px  */
+  --font-size-11:  0.6875rem;   /* 11px  */
+  --font-size-12:  0.75rem;     /* 12px  */
+  --font-size-13:  0.8125rem;   /* 13px  */
+  --font-size-14:  0.875rem;    /* 14px  */
+  --font-size-15:  0.9375rem;   /* 15px  */
+  --font-size-16:  1rem;       /* 16px  */
+  --font-size-19:  1.1875rem;  /* 19px  */
+  --font-size-24:  1.5rem;     /* 24px  */
+  --font-size-30:  1.875rem;   /* 30px  */
+  --font-size-32:  2rem;      /* 32px  */
+  --font-size-34:  2.125rem;   /* 34px  */
+
+  /* --- Spacing Grid --- */
+  --space-2:  0.125rem;  /* 2px  */
+  --space-4:  0.25rem;   /* 4px  */
+  --space-6:  0.375rem;  /* 6px  */
+  --space-8:  0.5rem;    /* 8px  */
+  --space-10: 0.625rem;  /* 10px */
+  --space-12: 0.75rem;   /* 12px */
+  --space-14: 0.875rem;  /* 14px */
+  --space-16: 1rem;      /* 16px */
+  --space-20: 1.25rem;   /* 20px */
+  --space-24: 1.5rem;     /* 24px */
+  --space-32: 2rem;      /* 32px */
+  --space-40: 2.5rem;    /* 40px */
+  --space-48: 3rem;      /* 48px */
+  --space-64: 4rem;      /* 64px */
+
+  /* --- Layout & Borders --- */
+  --size-layout-max:    1280px;
+  --size-sidebar-width: 340px;
+
+  --border-width-fine:     1px;
+  --border-width-standard: 2px;
+  --border-width-heavy:    4px;
+
+  /* --- Shadows --- */
+  --shadow-tape:  0 2px 4px rgba(0, 0, 0, 0.12);
+  --shadow-panel: 0 8px 24px rgba(21, 21, 21, 0.15);
+
+  /* --- Motion --- */
+  --motion-duration-fast:   120ms;
+  --motion-duration-normal: 280ms;
+  --motion-duration-slow:   360ms;
+  --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --- Z-Index Scale --- */
+  --z-index-base:    1;
+  --z-index-sticky:  10;
+  --z-index-scrim:   900;
+  --z-index-texture: 1000;
+  --z-index-search: 1100;
+
+  /* --- Asset Tokens (placeholders — resolved by banner system) --- */
+  --asset-banner-chart:  url('/banners/charts/banner-modern-rock-tracks.png');
+  --asset-banner-footer: url('/banners/charts/banner-modern-rock-tracks.png');
+}
+
+/* ==========================================================================
+   LAYER 2: SEMANTIC TOKENS
+   Purpose-driven values derived from primitives.
+   ========================================================================== */
+:root {
+  /* --- Surfaces --- */
+  --surface-canvas:        var(--color-neutral-400);
+  --surface-raised:        var(--color-neutral-200);
+  --surface-chart:        var(--color-neutral-300);
+  --surface-row-alternate: var(--color-white-alpha-15);
+  --surface-row-hover:     var(--color-white-alpha-40);
+
+  /* --- Typography Colors --- */
+  --text-primary:    var(--color-neutral-900);
+  --text-secondary:  var(--color-neutral-600);
+  --text-inverse:    var(--color-neutral-100);
+  --text-accent:     var(--color-crimson-600);
+
+  /* --- Status & Highlights --- */
+  --accent-primary:  var(--color-crimson-600);
+  --accent-hover:    var(--color-crimson-800);
+  --status-positive: var(--color-green-700);
+  --status-negative: var(--color-neutral-600);
+  --status-special:  var(--color-purple-600);
+  --status-alert:    var(--color-blue-700);
+
+  /* --- Architectural Borders & Focus --- */
+  --border-heavy:    var(--border-width-heavy) solid var(--color-neutral-900);
+  --border-strong:   var(--border-width-standard) solid var(--color-neutral-900);
+  --border-divider:  var(--border-width-fine) solid var(--color-black-alpha-22);
+  --border-hairline: var(--border-width-fine) solid var(--color-black-alpha-09);
+  --border-focus:    var(--border-width-standard) solid var(--color-neutral-900);
+}
+
+/* ==========================================================================
+   LAYER 3: COMPONENT TOKENS
+   Values bound to specific reusable components, derived from semantic layer.
+   ========================================================================== */
+:root {
+  /* --- Site Header --- */
+  --header-border: var(--border-strong);
+
+  /* --- Navigation Tape Links --- */
+  --nav-tape-surface:       var(--color-tape-base);
+  --nav-tape-border:        var(--border-width-standard) dashed var(--color-black-alpha-15);
+  --nav-tape-shadow:        var(--shadow-tape);
+  --nav-link-color:         var(--text-primary);
+  --nav-link-hover-color:   var(--accent-primary);
+
+  /* --- Search Panel --- */
+  --search-panel-surface:  var(--surface-raised);
+  --search-panel-border:   var(--border-strong);
+  --search-panel-shadow:   var(--shadow-panel);
+  --search-input-border:  3px solid var(--text-primary);
+
+  /* --- Breadcrumbs --- */
+  --breadcrumb-border:    var(--border-strong);
+  --breadcrumb-text-color:    var(--text-secondary);
+  --breadcrumb-current-color: var(--text-primary);
+
+  /* --- Chart Table --- */
+  --chart-table-border-top:   var(--border-heavy);
+  --chart-table-nav-border:   var(--border-strong);
+  --chart-row-surface-zebra:  var(--surface-row-alternate);
+  --chart-row-surface-hover:  var(--surface-row-hover);
+  --chart-row-border-divider: var(--border-hairline);
+  --chart-row-rank-border:    var(--border-divider);
+  --chart-row-rank-color:     var(--text-primary);
+  --chart-row-move-up:        var(--status-positive);
+  --chart-row-move-down:      var(--status-negative);
+  --chart-row-move-new:       var(--accent-primary);
+  --chart-row-move-re:        var(--status-special);
+  --chart-row-note-color:     var(--accent-primary);
+
+  /* --- Chart Events Sidebar --- */
+  --chart-event-head-border:  var(--border-heavy);
+  --chart-event-item-border:  var(--border-hairline);
+  --chart-event-badge-border: var(--border-divider);
+  --chart-event-leader-color: var(--accent-primary);
+  --chart-event-drop-color:   var(--status-alert);
+}
