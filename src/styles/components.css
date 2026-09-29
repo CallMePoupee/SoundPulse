@@ -5629,27 +5629,25 @@
   justify-content: center;
   gap: var(--space-8);
   border: 2px dashed rgba(21, 21, 21, 0.42);
-  background: rgba(255, 255, 255, 0.5);
+  background: transparent;
   color: var(--text-primary);
   font-size: var(--font-size-13);
   font-weight: var(--font-weight-bold);
   text-align: center;
-  transition: background var(--motion-duration-fast) var(--motion-easing-standard),
-    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+  transition: border-color var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
 .admin-added-song-report-banner:hover,
 .admin-added-song-report-cover:hover {
   border-color: var(--accent-primary);
-  background: rgba(255, 255, 255, 0.78);
 }
 
 .admin-added-song-report-banner--performer {
   min-height: 112px;
   width: 100%;
-  background: rgba(91, 145, 74, 0.92);
-  color: var(--color-neutral-100);
-  border-color: transparent;
+  background: transparent;
+  color: var(--text-primary);
+  border-color: rgba(21, 21, 21, 0.42);
   font-size: var(--font-size-19);
 }
 
@@ -5663,9 +5661,9 @@
 
 .admin-added-song-report-cover {
   min-height: 190px;
-  background: rgba(157, 57, 193, 0.9);
-  color: var(--color-neutral-100);
-  border-color: transparent;
+  background: transparent;
+  color: var(--text-primary);
+  border-color: rgba(21, 21, 21, 0.42);
   flex-direction: column;
   font-size: var(--font-size-16);
 }
@@ -5676,7 +5674,7 @@
   gap: var(--space-12);
   min-width: 0;
   padding: var(--space-16);
-  background: rgba(255, 255, 255, 0.7);
+  background: transparent;
 }
 
 .admin-added-song-report-album {
@@ -5722,15 +5720,15 @@
 .admin-added-song-report-banner--album,
 .admin-added-song-report-banner--song {
   min-height: 72px;
-  background: rgba(107, 105, 39, 0.9);
-  color: var(--color-neutral-100);
-  border-color: transparent;
+  background: transparent;
+  color: var(--text-primary);
+  border-color: rgba(21, 21, 21, 0.42);
   font-size: var(--font-size-16);
 }
 
 .admin-added-song-report .admin-csv-song-card-errors {
   margin: calc(-1 * var(--space-4)) 0 0;
-  background: rgba(255, 255, 255, 0.8);
+  background: transparent;
 }
 
 @media (max-width: 768px) {
