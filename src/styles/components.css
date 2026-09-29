@@ -5573,7 +5573,7 @@
   flex-direction: column;
   gap: var(--space-12);
   padding: var(--space-20);
-  background-color: #f4c52f;
+  background-color: transparent;
   background-image: url('/interface/added-songs.png');
   background-size: 100% 100%;
   background-position: center;
