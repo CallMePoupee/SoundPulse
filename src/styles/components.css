@@ -5243,25 +5243,44 @@
   white-space: nowrap;
 }
 
-/* ── Media zone (banners + covers) ── */
+/* ── Two-column body: media left, info right ── */
+.admin-csv-song-card-body {
+  display: flex;
+  gap: 1px;
+  background: var(--color-black-alpha-09);
+  border-top: 1px solid var(--color-black-alpha-09);
+  border-bottom: 1px solid var(--color-black-alpha-09);
+}
+
+/* ── Left column: media ── */
 .admin-csv-song-card-media {
   display: flex;
-  gap: var(--space-16);
-  padding: 0 var(--space-20) var(--space-16) var(--space-20);
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  background: var(--color-neutral-100);
+  flex-shrink: 0;
+  width: 340px;
 }
 
 .admin-csv-song-card-banners {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  flex: 1;
-  min-width: 0;
 }
 
 .admin-csv-song-card-covers {
   display: flex;
   gap: var(--space-8);
-  flex-shrink: 0;
+}
+
+/* ── Right column: info ── */
+.admin-csv-song-card-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  background: var(--color-neutral-100);
 }
 
 /* ── Media slots ── */
@@ -5308,8 +5327,6 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--color-black-alpha-09);
-  border-top: 1px solid var(--color-black-alpha-09);
-  border-bottom: 1px solid var(--color-black-alpha-09);
 }
 
 .admin-csv-song-card-field {
@@ -5341,6 +5358,7 @@
 /* ── Footer ── */
 .admin-csv-song-card-footer {
   padding: var(--space-12) var(--space-20);
+  background: var(--color-neutral-100);
 }
 
 /* ── Error section ── */
@@ -5349,7 +5367,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  border-top: 1px solid rgba(177, 38, 38, 0.12);
   background: rgba(177, 38, 38, 0.04);
 }
 
@@ -5428,16 +5445,17 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .admin-csv-song-card-fields {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .admin-csv-song-card-media {
+  .admin-csv-song-card-body {
     flex-direction: column;
   }
 
-  .admin-csv-song-card-covers {
-    justify-content: flex-start;
+  .admin-csv-song-card-media {
+    width: 100%;
+  }
+
+  .admin-csv-song-card-fields {
+    grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--color-black-alpha-09);
   }
 
   .admin-csv-media-slot--cover {
