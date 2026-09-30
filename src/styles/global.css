@@ -26,11 +26,6 @@ body {
   color: var(--text-primary);
   font-family: var(--font-family-primary);
   background-color: var(--surface-canvas);
-  background-image: url('/backgrounds/background.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   position: relative;
   min-height: 100vh;
   line-height: 1.4;
@@ -97,7 +92,7 @@ body::after {
    ========================================================================== */
 @media (prefers-contrast: more) {
   :root {
-    --surface-canvas:       #FFFFFF;
+    --surface-canvas:       transparent;
     --surface-raised:       #F2F2F2;
     --text-primary:         #000000;
     --text-secondary:       #222222;

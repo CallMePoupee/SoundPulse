@@ -226,8 +226,8 @@ export default function AdminAddMusicPage() {
         <div className="admin-csv-interface admin-csv-interface--nav-width">
           {/* Background Image with Textarea Overlay */}
           <div className="admin-csv-background">
-            <img 
-              src="/interface/add-songs-from-csv.png" 
+            <img
+              src="/interface/add-songs-from-csv.png"
               alt="Add Songs from CSV Interface"
               className="admin-csv-background-image"
             />
@@ -260,135 +260,166 @@ export default function AdminAddMusicPage() {
             </button>
           </div>
 
-          {/* Processing Indicator */}
-          {isProcessing && (
-            <div className="admin-csv-processing">
-              <div className="admin-spinner admin-spinner--small" />
-              <span>Processing CSV data...</span>
-            </div>
-          )}
-
-          {/* Validation Summary */}
-          {showPreview && (
-            <div className="admin-csv-summary">
-              <div className="admin-csv-summary-stats">
-                <div className="admin-csv-stat admin-csv-stat--success">
-                  <CheckCircle size={16} />
-                  <span>{validSongs.length} Valid Songs</span>
+          {/* Results Section */}
+          {showPreview && parsedSongs.length > 0 && (
+            <div className="admin-csv-results">
+              {/* Summary Statistics */}
+              <div className="admin-csv-summary">
+                <div className="admin-csv-summary-header">
+                  <h3>Import Summary</h3>
+                  <div className="admin-csv-summary-stats">
+                    <div className="admin-csv-stat admin-csv-stat--total">
+                      <span className="admin-csv-stat-value">{parsedSongs.length}</span>
+                      <span className="admin-csv-stat-label">Total Songs</span>
+                    </div>
+                    <div className="admin-csv-stat admin-csv-stat--success">
+                      <span className="admin-csv-stat-value">{validSongs.length}</span>
+                      <span className="admin-csv-stat-label">Valid</span>
+                    </div>
+                    <div className="admin-csv-stat admin-csv-stat--error">
+                      <span className="admin-csv-stat-value">{invalidSongs.length}</span>
+                      <span className="admin-csv-stat-label">Errors</span>
+                    </div>
+                    <div className="admin-csv-stat admin-csv-stat--assets">
+                      <span className="admin-csv-stat-value">{parsedSongs.filter(s => s.hasAsset).length}</span>
+                      <span className="admin-csv-stat-label">With Assets</span>
+                    </div>
+                  </div>
                 </div>
-                {invalidSongs.length > 0 && (
-                  <div className="admin-csv-stat admin-csv-stat--error">
-                    <AlertCircle size={16} />
-                    <span>{invalidSongs.length} Invalid Songs</span>
+
+                {/* Import Actions */}
+                {validSongs.length > 0 && (
+                  <div className="admin-csv-import-actions">
+                    <button
+                      type="button"
+                      className="admin-button admin-button--primary"
+                      onClick={handleImport}
+                      disabled={isProcessing}
+                    >
+                      <Save size={16} />
+                      {isProcessing ? 'Importing...' : `Import ${validSongs.length} Valid Songs`}
+                    </button>
                   </div>
                 )}
               </div>
-              
-              {validSongs.length > 0 && (
-                <button
-                  type="button"
-                  className="admin-button admin-button--primary"
-                  onClick={handleImport}
-                  disabled={isProcessing}
-                >
-                  {isProcessing ? (
-                    <>
-                      <div className="admin-spinner admin-spinner--small" />
-                      Importing...
-                    </>
-                  ) : (
-                    <>
-                      <Save size={16} />
-                      Import {validSongs.length} Songs
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-          )}
 
-          {/* Preview Cards */}
-          {showPreview && parsedSongs.length > 0 && (
-            <div className="admin-csv-preview">
-              <div className="admin-csv-preview-header">
-                <h3>Preview</h3>
-                <span className="admin-csv-preview-count">{parsedSongs.length} {parsedSongs.length === 1 ? 'song' : 'songs'}</span>
-              </div>
-              <div className="admin-csv-card-list">
-                {parsedSongs.map((song, index) => (
-                  <div key={index} className={`admin-csv-song-card ${song.errors.length > 0 ? 'admin-csv-song-card--error' : 'admin-csv-song-card--valid'}`}>
-                    <div className="admin-added-song-report">
-                      <div className="admin-added-song-report-topline">
-                        <div className="admin-added-song-report-field admin-added-song-report-field--performer">
-                          <span className="admin-added-song-report-label">Performer</span>
-                          <span className="admin-added-song-report-value">{song.performer || 'Unknown performer'}</span>
-                        </div>
-                        <div className="admin-added-song-report-field admin-added-song-report-field--title">
-                          <span className="admin-added-song-report-label">Song Title</span>
-                          <span className="admin-added-song-report-value">{song.title || 'Untitled'}</span>
-                        </div>
-                        <span className="admin-added-song-report-index">#{index + 1}</span>
-                        <span className={`admin-csv-status-badge ${song.errors.length === 0 ? 'admin-csv-status-badge--valid' : 'admin-csv-status-badge--error'}`}>
-                          {song.errors.length === 0 ? <CheckCircle size={14} /> : <AlertCircle size={14} />}
-                          <span>{song.errors.length === 0 ? 'Valid' : `${song.errors.length} ${song.errors.length === 1 ? 'error' : 'errors'}`}</span>
-                        </span>
-                      </div>
+              {/* Song Cards */}
+              <div className="admin-csv-preview">
+                <div className="admin-csv-preview-header">
+                  <h4>Song Details</h4>
+                  <span className="admin-csv-preview-count">
+                    {parsedSongs.length} song{parsedSongs.length !== 1 ? 's' : ''} parsed
+                  </span>
+                </div>
 
-                      <div className="admin-added-song-report-banner admin-added-song-report-banner--performer">
-                        <ImagePlus size={22} />
-                        <span>Performer Banner</span>
-                      </div>
-
-                      <div className="admin-added-song-report-main">
-                        <div className="admin-added-song-report-cover admin-added-song-report-cover--album">
-                          <ImagePlus size={22} />
-                          <span>Album Cover</span>
-                        </div>
-                        <div className="admin-added-song-report-details">
-                          <div className="admin-added-song-report-album">{song.album || 'Album Name'}</div>
-                          <div className="admin-added-song-report-meta">
-                            <span><strong>Year</strong>{song.releaseYear || '—'}</span>
-                            <span><strong>Label</strong>{song.recordLabel || '—'}</span>
+                <div className="admin-csv-card-list">
+                  {parsedSongs.map((song, index) => (
+                    <div key={index} className={`song-import-card ${song.errors.length > 0 ? 'admin-csv-song-card--error' : 'admin-csv-song-card--valid'}`}>
+                        {/* Header Section */}
+                        <div className="song-import-header">
+                          <div className="song-import-titles">
+                            <h3 className="song-import-performer">{song.performer || 'Not specified'}</h3>
+                            <h4 className="song-import-title">{song.title || 'Not specified'}</h4>
                           </div>
-                          <div className="admin-added-song-report-genres"><strong>Genres</strong>{song.genre || '—'}</div>
-                          <div className="admin-added-song-report-origin">
-                            <span><strong>Performer’s city of origin</strong>{song.cityOfOrigin || '—'}</span>
-                            <span><strong>Year active since</strong>{song.activeSince || '—'}</span>
+                          <div className={`song-import-status ${song.errors.length === 0 ? 'song-import-status--valid' : 'song-import-status--error'}`}>
+                            {song.errors.length === 0 ? <CheckCircle size={16} /> : <AlertCircle size={16} />}
+                            <span>{song.errors.length === 0 ? 'Valid' : 'Error'}</span>
                           </div>
-                          <span className={`admin-csv-asset ${song.hasAsset ? 'admin-csv-asset--found' : 'admin-csv-asset--missing'}`}>
-                            {song.hasAsset ? 'Assets Found' : 'Assets Missing'}
-                          </span>
                         </div>
-                        <div className="admin-added-song-report-cover admin-added-song-report-cover--song">
-                          <ImagePlus size={22} />
-                          <span>Song Cover</span>
-                        </div>
-                      </div>
 
-                      <div className="admin-added-song-report-bottom-banners">
-                        <div className="admin-added-song-report-banner admin-added-song-report-banner--album">
-                          <ImagePlus size={20} />
-                          <span>Album Banner</span>
+                        {/* Performer Banner */}
+                        <div className="song-import-performer-banner">
+                          <div className="asset-placeholder asset-placeholder--banner">
+                            <ImagePlus size={20} />
+                            <span className={`asset-status ${song.hasAsset ? 'asset-status--found' : 'asset-status--missing'}`}>
+                              Performer Banner
+                            </span>
+                          </div>
                         </div>
-                        <div className="admin-added-song-report-banner admin-added-song-report-banner--song">
-                          <ImagePlus size={20} />
-                          <span>Song Banner</span>
-                        </div>
-                      </div>
 
-                      {song.errors.length > 0 && (
-                        <div className="admin-csv-song-card-errors">
-                          {song.errors.map((error, errorIndex) => (
-                            <div key={errorIndex} className="admin-csv-error">
-                              <AlertCircle size={11} className="admin-csv-error-icon" />
-                              <span>{error}</span>
+                        {/* Main Content Grid */}
+                        <div className="song-import-content">
+                          {/* Left Column - Album Cover */}
+                          <div className="song-import-album-cover">
+                            <div className="asset-placeholder asset-placeholder--cover">
+                              <ImagePlus size={32} />
+                              <span className={`asset-status ${song.hasAsset ? 'asset-status--found' : 'asset-status--missing'}`}>
+                                Album Cover
+                              </span>
                             </div>
-                          ))}
+                          </div>
+
+                          {/* Center Column - Song Details */}
+                          <div className="song-import-details">
+                            <div className="song-import-album-title">
+                              {song.album || 'No album specified'}
+                            </div>
+                            
+                            <div className="song-import-metadata">
+                              <div className="metadata-row">
+                                <span className="metadata-label">Release Year:</span>
+                                <span className="metadata-value">{song.releaseYear || 'Not specified'}</span>
+                              </div>
+                              <div className="metadata-row">
+                                <span className="metadata-label">City of Origin:</span>
+                                <span className="metadata-value">{song.cityOfOrigin || 'Not specified'}</span>
+                              </div>
+                              <div className="metadata-row">
+                                <span className="metadata-label">Record Label:</span>
+                                <span className="metadata-value">{song.recordLabel || 'Not specified'}</span>
+                              </div>
+                              <div className="metadata-row">
+                                <span className="metadata-label">Active Since:</span>
+                                <span className="metadata-value">{song.activeSince || 'Not specified'}</span>
+                              </div>
+                              <div className="metadata-row">
+                                <span className="metadata-label">Genres:</span>
+                                <span className="metadata-value">{song.genre || 'Not specified'}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Right Column - Song Cover */}
+                          <div className="song-import-song-cover">
+                            <div className="asset-placeholder asset-placeholder--cover">
+                              <ImagePlus size={32} />
+                              <span className={`asset-status ${song.hasAsset ? 'asset-status--found' : 'asset-status--missing'}`}>
+                                Song Cover
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      )}
+
+                        {/* Bottom Banners */}
+                        <div className="song-import-bottom-banners">
+                          <div className="asset-placeholder asset-placeholder--banner">
+                            <ImagePlus size={20} />
+                            <span className={`asset-status ${song.hasAsset ? 'asset-status--found' : 'asset-status--missing'}`}>
+                              Song Banner
+                            </span>
+                          </div>
+                          <div className="asset-placeholder asset-placeholder--banner">
+                            <ImagePlus size={20} />
+                            <span className={`asset-status ${song.hasAsset ? 'asset-status--found' : 'asset-status--missing'}`}>
+                              Album Banner
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Error Section */}
+                        {song.errors.length > 0 && (
+                          <div className="song-import-errors">
+                            {song.errors.map((error, errorIndex) => (
+                              <div key={errorIndex} className="error-message">
+                                <AlertCircle size={14} />
+                                <span>{error}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           )}

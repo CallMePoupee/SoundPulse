@@ -5176,7 +5176,7 @@
 .admin-csv-song-card {
   display: flex;
   flex-direction: column;
-  background: var(--color-neutral-100);
+  background: transparent;
   border: 1px solid var(--color-black-alpha-15);
   border-radius: var(--radius-8);
   overflow: hidden;
@@ -5189,11 +5189,9 @@
 }
 
 .admin-csv-song-card--valid {
-  border-left: 3px solid var(--status-positive);
 }
 
 .admin-csv-song-card--error {
-  border-left: 3px solid var(--accent-primary);
 }
 
 /* ── Card header ── */
@@ -5258,7 +5256,7 @@
   flex-direction: column;
   gap: var(--space-12);
   padding: var(--space-16);
-  background: var(--color-neutral-100);
+  background: transparent;
   flex-shrink: 0;
   width: 340px;
 }
@@ -5279,8 +5277,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 0;
-  background: var(--color-neutral-100);
+  min-width: 0;background: transparent;
 }
 
 /* ── Media slots ── */
@@ -5334,7 +5331,7 @@
   flex-direction: column;
   gap: 2px;
   padding: var(--space-12) var(--space-20);
-  background: var(--color-neutral-100);
+  background: transparent;
   min-width: 0;
 }
 
@@ -5358,7 +5355,7 @@
 /* ── Footer ── */
 .admin-csv-song-card-footer {
   padding: var(--space-12) var(--space-20);
-  background: var(--color-neutral-100);
+  background: transparent;
 }
 
 /* ── Error section ── */
@@ -5574,15 +5571,11 @@
   gap: var(--space-12);
   padding: var(--space-20);
   background-color: transparent;
-  background-image: url('/interface/added-songs.png');
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .admin-added-song-report-topline {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) auto auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) auto;
   align-items: center;
   gap: var(--space-12);
 }
@@ -5590,12 +5583,94 @@
 .admin-added-song-report-field {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: var(--space-8);
   min-width: 0;
   min-height: 48px;
   padding: var(--space-8) var(--space-12);
   background: transparent;
   color: var(--text-primary);
+}
+
+.admin-added-song-report-field--performer {
+  justify-self: start;
+}
+
+.admin-added-song-report-performer,
+.admin-added-song-report-title {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-primary);
+  padding: var(--space-8) var(--space-12);
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.admin-added-song-report-performer {
+  justify-self: start;
+}
+
+.admin-added-song-report-title {
+  justify-self: start;
+}
+
+.admin-added-song-report-performer-banner {
+  display: flex;
+  width: 100%;
+  margin: var(--space-12) 0;
+}
+
+.admin-added-song-report-bottom-banners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  margin-top: var(--space-16);
+}
+
+.admin-added-song-report-main {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.admin-added-song-report-left {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.admin-added-song-report-right {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-added-song-report-cover--song {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border: 2px dashed rgba(21, 21, 21, 0.42);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  min-height: 190px;
+  width: 190px;
+  padding: var(--space-16);
+  border-radius: var(--radius-4);
+  transition: border-color var(--motion-duration-fast) ease;
+}
+
+.admin-added-song-report-cover--song:hover {
+  border-color: var(--accent-primary);
 }
 
 .admin-added-song-report-label {
@@ -5776,5 +5851,601 @@
 
   .admin-added-song-report-banner--performer {
     min-height: 76px;
+  }
+}
+
+/* ==========================================================================
+   CSV RESULTS INTERFACE
+   ========================================================================== */
+
+/* ── Results Container ── */
+.admin-csv-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  margin-top: var(--space-32);
+  width: 100%;
+}
+
+/* ── Summary Section ── */
+.admin-csv-summary {
+  background: var(--surface-canvas);
+  border: var(--border-strong);
+  border-radius: var(--radius-8);
+  padding: var(--space-24);
+  box-shadow: 0 2px 8px rgba(21, 21, 21, 0.08);
+}
+
+.admin-csv-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-20);
+  gap: var(--space-24);
+}
+
+.admin-csv-summary-header h3 {
+  margin: 0;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-black);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-csv-summary-stats {
+  display: flex;
+  gap: var(--space-24);
+  align-items: center;
+}
+
+.admin-csv-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 80px;
+}
+
+.admin-csv-stat-value {
+  font-size: var(--font-size-28);
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.admin-csv-stat-label {
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-heavy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+.admin-csv-stat--total .admin-csv-stat-value {
+  color: var(--text-primary);
+}
+
+.admin-csv-stat--success .admin-csv-stat-value {
+  color: var(--status-positive);
+}
+
+.admin-csv-stat--error .admin-csv-stat-value {
+  color: var(--accent-primary);
+}
+
+.admin-csv-stat--assets .admin-csv-stat-value {
+  color: var(--status-warning);
+}
+
+/* ── Import Actions ── */
+.admin-csv-import-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-16);
+  margin-top: var(--space-20);
+  padding-top: var(--space-20);
+  border-top: var(--border-hairline);
+}
+
+/* ── Preview Section Enhancements ── */
+.admin-csv-preview {
+  background: transparent;
+}
+
+.admin-csv-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-20);
+  padding-bottom: var(--space-12);
+  border-bottom: var(--border-hairline);
+}
+
+.admin-csv-preview-header h4 {
+  margin: 0;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-black);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-csv-preview-count {
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: var(--surface-secondary);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-4);
+}
+
+/* ── Enhanced Song Cards ── */
+.admin-csv-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.admin-csv-song-card {
+  background: var(--surface-canvas);
+  border: var(--border-strong);
+  border-radius: var(--radius-8);
+  overflow: hidden;
+  transition: all var(--motion-duration-normal) ease;
+  box-shadow: 0 1px 3px rgba(21, 21, 21, 0.06);
+}
+
+.admin-csv-song-card:hover {
+  box-shadow: 0 4px 16px rgba(21, 21, 21, 0.12);
+  transform: translateY(-1px);
+}
+
+.admin-csv-song-card--valid {
+  border-left: 4px solid var(--status-positive);
+}
+
+.admin-csv-song-card--error {
+  border-left: 4px solid var(--accent-primary);
+}
+
+/* ── Enhanced Status Badges ── */
+.admin-csv-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-4);
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-heavy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-csv-status-badge--valid {
+  background: rgba(29, 112, 50, 0.12);
+  color: var(--status-positive);
+  border: 1px solid rgba(29, 112, 50, 0.2);
+}
+
+.admin-csv-status-badge--error {
+  background: rgba(177, 38, 38, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(177, 38, 38, 0.2);
+}
+
+/* ── Enhanced Asset Indicators ── */
+.admin-csv-asset {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-4);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-heavy);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-csv-asset--found {
+  background: rgba(29, 112, 50, 0.12);
+  color: var(--status-positive);
+  border: 1px solid rgba(29, 112, 50, 0.2);
+}
+
+.admin-csv-asset--missing {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--status-warning);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* ── Enhanced Error Display ── */
+.admin-csv-song-card-errors {
+  background: rgba(177, 38, 38, 0.05);
+  border-top: 1px solid rgba(177, 38, 38, 0.1);
+  padding: var(--space-16) var(--space-20);
+}
+
+.admin-csv-errors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.admin-csv-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  font-size: var(--font-size-13);
+  color: var(--accent-primary);
+}
+
+.admin-csv-error-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Responsive Design ── */
+@media (max-width: 1024px) {
+  .admin-csv-summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+  
+  /* ==========================================================================
+     REDESIGNED SONG IMPORT CARDS
+     ========================================================================== */
+  
+  /* Main Card Container */
+  .song-import-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(21, 21, 21, 0.08);
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  
+  .song-import-card:hover {
+    box-shadow: 0 4px 16px rgba(21, 21, 21, 0.12);
+    transform: translateY(-1px);
+  }
+  
+  .song-import-card.admin-csv-song-card--valid {
+    border-left: 4px solid #1d7032;
+  }
+  
+  .song-import-card.admin-csv-song-card--error {
+    border-left: 4px solid #b12626;
+  }
+  
+  /* Header Section */
+  .song-import-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  .song-import-titles {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .song-import-performer {
+    font-size: 1.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #333333;
+    margin: 0 0 8px 0;
+    line-height: 1.1;
+  }
+  
+  .song-import-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #666666;
+    margin: 0;
+    line-height: 1.1;
+  }
+  
+  .song-import-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  
+  .song-import-status--valid {
+    background: rgba(29, 112, 50, 0.12);
+    color: #1d7032;
+    border: 1px solid rgba(29, 112, 50, 0.2);
+  }
+  
+  .song-import-status--error {
+    background: rgba(177, 38, 38, 0.12);
+    color: #b12626;
+    border: 1px solid rgba(177, 38, 38, 0.2);
+  }
+  
+  /* Performer Banner */
+  .song-import-performer-banner {
+    padding: 0 24px 16px;
+  }
+  
+  /* Main Content Grid */
+  .song-import-content {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 24px;
+    padding: 20px 24px;
+    align-items: start;
+  }
+  
+  /* Album Details */
+  .song-import-details {
+    min-width: 0;
+  }
+  
+  .song-import-album-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #333333;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  
+  .song-import-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .metadata-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+    align-items: baseline;
+  }
+  
+  .metadata-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #666666;
+  }
+  
+  .metadata-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+  }
+  
+  /* Asset Placeholders */
+  .asset-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 2px dashed rgba(21, 21, 21, 0.3);
+    background: rgba(0, 0, 0, 0.02);
+    color: #666666;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .asset-placeholder:hover {
+    border-color: #b12626;
+    background: rgba(0, 0, 0, 0.04);
+  }
+  
+  .asset-placeholder--cover {
+    aspect-ratio: 1;
+    padding: 16px;
+  }
+  
+  .asset-placeholder--banner {
+    min-height: 80px;
+    padding: 16px;
+  }
+  
+  .asset-status {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  .asset-status--found {
+    background: rgba(29, 112, 50, 0.12);
+    color: #1d7032;
+  }
+  
+  .asset-status--missing {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+  }
+  
+  /* Bottom Banners */
+  .song-import-bottom-banners {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 16px 24px 20px;
+    border-top: 1px solid #e5e5e5;
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  /* Error Section */
+  .song-import-errors {
+    padding: 16px 24px;
+    background: rgba(177, 38, 38, 0.05);
+    border-top: 1px solid rgba(177, 38, 38, 0.1);
+  }
+  
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #b12626;
+    margin-bottom: 8px;
+  }
+  
+  .error-message:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .song-import-content {
+      grid-template-columns: 160px 1fr 160px;
+      gap: var(--space-16);
+    }
+    
+    .metadata-row {
+      grid-template-columns: 100px 1fr;
+      gap: var(--space-8);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .song-import-header {
+      flex-direction: column;
+      gap: var(--space-12);
+      align-items: flex-start;
+    }
+    
+    .song-import-status {
+      align-self: flex-start;
+    }
+    
+    .song-import-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-20);
+    }
+    
+    .song-import-album-cover,
+    .song-import-song-cover {
+      max-width: 200px;
+      justify-self: center;
+    }
+    
+    .song-import-bottom-banners {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+    
+    .metadata-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    
+    .song-import-performer {
+      font-size: 1.5rem;
+    }
+    
+    .song-import-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .admin-csv-summary-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-csv-stat {
+    min-width: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-csv-results {
+    gap: var(--space-24);
+    margin-top: var(--space-24);
+  }
+
+  .admin-csv-summary {
+    padding: var(--space-16);
+  }
+
+  .admin-csv-summary-stats {
+    flex-wrap: wrap;
+    gap: var(--space-16);
+  }
+
+  .admin-csv-stat {
+    flex: 1;
+    min-width: 70px;
+  }
+
+  .admin-csv-import-actions {
+    justify-content: stretch;
+  }
+
+  .admin-csv-import-actions .admin-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-csv-card-list {
+    gap: var(--space-16);
+  }
+
+  .admin-added-song-report {
+    padding: var(--space-12);
+  }
+
+  .admin-added-song-report-topline {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .admin-added-song-report-index {
+    order: -1;
+  }
+
+  .admin-csv-status-badge {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-csv-summary-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+  }
+
+  .admin-csv-stat-value {
+    font-size: var(--font-size-24);
+  }
+
+  .admin-csv-preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-8);
   }
 }
