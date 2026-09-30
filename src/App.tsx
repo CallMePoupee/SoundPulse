@@ -16,14 +16,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/performers" element={<PerformersPage />} />
-        <Route path="/songs" element={<SongsPage />} />
-        <Route path="/albums" element={<AlbumsPage />} />
-        <Route path="/versus" element={<VersusPage />} />
-        <Route path="/charts/1999/week-of-september-14" element={<WeeklyChartPage />} />
-        <Route path="/:performer/:album" element={<AlbumPage />} />
-        <Route path="/:performer/:album/:song" element={<SongPage />} />
-        <Route path="/:performer" element={<PerformerPage />} />
+        <Route path="/" element={<Navigate to="/charts/1999/week-of-september-14" replace />} />
+        <Route path="/home" element={<Navigate to="/charts/1999/week-of-september-14" replace />} />
         <Route
           path="/admin"
           element={
@@ -36,6 +30,14 @@ function App() {
           <Route path="add-music" element={<AdminAddMusicPage />} />
           <Route index element={<AdminHomePage />} />
         </Route>
+        <Route path="/performers" element={<PerformersPage />} />
+        <Route path="/songs" element={<SongsPage />} />
+        <Route path="/albums" element={<AlbumsPage />} />
+        <Route path="/versus" element={<VersusPage />} />
+        <Route path="/charts/1999/week-of-september-14" element={<WeeklyChartPage />} />
+        <Route path="/:performer/:album/:song" element={<SongPage />} />
+        <Route path="/:performer/:album" element={<AlbumPage />} />
+        <Route path="/:performer" element={<PerformerPage />} />
         <Route path="*" element={<Navigate to="/charts/1999/week-of-september-14" replace />} />
       </Routes>
     </BrowserRouter>
